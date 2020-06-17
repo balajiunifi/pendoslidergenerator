@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <link href="style.css" rel="stylesheet">
+    </head>
+    <body>
+    <div class="form">
+        <div class="slide-container">
+            <div class="slide">
+                <div>
+                    header : <textarea class="slide-header" ></textarea>
+                </div>
+                <div>
+                    image: <input class="slide-image" type="file" />
+                </div>
+                <div>
+                    content: <textarea class="slide-content"></textarea>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button id="add-slide">add slide</button>
+            <button id="export">export</button>
+        </div>
+    </div>
+    <div class="exporter" style="display: none">
+        <div>
+            <textarea class="html" readonly>
+            &lt;div class='slider-wrapper'&gt;
+              &lt;div class='slider-container'&gt;
+              &lt;/div&gt;
+              &lt;div class='slider-nav-container'&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+        </textarea>
+            <textarea class="css"  readonly>
+            .slider-wrapper {
+                 width: 100%;
+                 height: 100%;
+                 position: absolute;
+            }
+             .slider-wrapper .slider-container {
+                 height: calc(100% - 80px);
+                 position: relative;
+            }
+             .slider-wrapper .slider-container .slider {
+                 position: absolute;
+                 top: 50%;
+                 left: 50%;
+                 transform: translate(-50%, -50%);
+                 opacity: 0;
+                 transition: opacity 0.5s ease;
+                 z-index: 1;
+            }
+             .slider-wrapper .slider-container .slider.active {
+                 opacity: 1;
+                 z-index: 2;
+            }
+             .slider-wrapper .slider-container .slider h3 {
+                 text-align: center;
+                 font-weight: 600;
+                 padding-bottom: 10px;
+            }
+             .slider-wrapper .slider-container .slider div {
+                 width: 100%;
+            }
+             .slider-wrapper .slider-container .slider div img {
+                 max-width: 100%;
+                 max-height: 100%;
+                 display: block;
+                 margin: 0 auto;
+            }
+             .slider-wrapper .slider-nav-container {
+                 height: 50px;
+                 text-align: center;
+            }
+             .slider-wrapper .slider-nav-container span {
+                 border: 1px solid #000;
+                 border-radius: 10px;
+                 width: 6px;
+                 height: 6px;
+                 display: inline-block;
+                 margin: 3px;
+                 cursor: pointer;
+            }
+             .slider-wrapper .slider-nav-container span.active {
+                 background-color: #000;
+            }
+        </textarea>
+            <textarea class="js"  readonly>
+
+        </textarea>
+        </div>
+        <div>
+            <button class="reset">reset</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous"></script>
+    <script src="global.js"></script>
+    </body>
+</html>
