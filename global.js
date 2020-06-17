@@ -77,13 +77,27 @@ $(document).ready(() => {
 
            Promise.all(promises)
                .then(() => {
-                   let js = 'window.__pendoSlideList = JSON.parse(' + JSON.stringify(slide) + ');\n\n';
+                   let js = 'window.__pendoSlideList = ' + JSON.stringify(slide) + ';\n\n';
 
                    $(".js")
                        .val(js + Jscode);
 
                    $(".exporter").show();
                    $(".form").hide();
+
+                   $('iframe')[0].src = 'data:text/html;charset=utf-8,' + escape (`
+                    <head>
+                        <style>
+                            ${$('.css').val()}
+                        </style>
+                    </head>
+                    <body>
+                        ${$('.html').val()}
+                        <script>
+                            ${$('.js').val()}
+                        </script>
+                    </body>
+               `);
                });
        })
     });
