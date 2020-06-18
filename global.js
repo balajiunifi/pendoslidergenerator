@@ -1,5 +1,5 @@
-const Jscode = "let noCarousel = __pendoSlideList.length == 1;\n" +
-    "for (let i = 0; i < __pendoSlideList.length; i++) {\n" +
+const Jscode = "var noCarousel = __pendoSlideList.length == 1;\n" +
+    "for (var i = 0; i < __pendoSlideList.length; i++) {\n" +
     "\tappend(\".slider-container\", \n" +
     "  `<div class='slider ${ i == 0 ? 'active': ''}'>\n" +
     "  \t\t<h3>${__pendoSlideList[i].header}</h3>\n" +
