@@ -1,5 +1,5 @@
-const Jscode = "var noCarousel = __pendoSlideList.length == 1;\n" +
-    "for (var i = 0; i < __pendoSlideList.length; i++) {\n" +
+const Jscode = "window.noCarousel = __pendoSlideList.length == 1;\n" +
+    "for (let i = 0; i < __pendoSlideList.length; i++) {\n" +
     "\tappend(\".slider-container\", \n" +
     "  `<div class='slider ${ i == 0 ? 'active': ''}'>\n" +
     "  \t\t<h3>${__pendoSlideList[i].header}</h3>\n" +
@@ -11,7 +11,7 @@ const Jscode = "var noCarousel = __pendoSlideList.length == 1;\n" +
     "      <p>${__pendoSlideList[i].content}</p>\n" +
     "   </div>`\n" +
     "  );\n" +
-    "  if (!noCarousel) {\n" +
+    "  if (!window.noCarousel) {\n" +
     "  \tappend(\".slider-nav-container\", `<span class=' ${ i == 0 ? 'active': ''}' data-index='${i}'></span>`);\n" +
     "  }\n" +
     "}\n" +
