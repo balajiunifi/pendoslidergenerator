@@ -4,104 +4,153 @@
     </head>
     <body>
     <div class="form">
-        <div class="slide-container">
-            <div class="slide">
+        <div class="step-container">
+            <div class="step">
+                <h2>Step 1</h2>
                 <div>
-                    header : <textarea class="slide-header" ></textarea>
+                    header : <textarea class="step-header" ></textarea>
                 </div>
                 <div>
-                    image: <input class="slide-image" type="file" />
+                    image: <input class="step-image" type="file" />
                 </div>
                 <div>
-                    content: <textarea class="slide-content"></textarea>
+                    content: <textarea class="step-content"></textarea>
+                </div>
+                <div>
+                    size: <select name="size" class="step-size">
+                            <option value="big">
+                                big
+                            </option>
+                            <option value="small">
+                                small
+                            </option>
+                            <option value="small-no-image">
+                                small with no image
+                            </option>
+                        </select>
                 </div>
             </div>
         </div>
         <div>
-            <button id="add-slide">add slide</button>
+            <button id="add-step">add step</button>
             <button id="export">export</button>
         </div>
     </div>
     <div class="exporter" style="display: none">
-        <div>
+        <div class="exporter-item" style="display: none">
             <textarea class="html" readonly>
-            &lt;div class='slider-wrapper'&gt;
-              &lt;div class='slider-container'&gt;
-              &lt;/div&gt;
-              &lt;div class='slider-nav-container'&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-        </textarea>
+
+            </textarea>
             <textarea class="css"  readonly>
-            .slider-wrapper {
-	 width: 300px;
-	 height: 400px;
+.step-container {
+	 background: #02293b;
+	 color: #fff;
+	 font-family: Open Sans;
+	 padding-top: 15px;
+	 border-radius: 5px;
+}
+ .step-container .step-body {
+	 width: 90%;
 	 margin: 0 auto;
 }
- .slider-wrapper .slider-container {
-	 width: 300px;
-	 height: 380px;
-	 position: relative;
-	 overflow: hidden;
-}
- .slider-wrapper .slider-container .slider {
-	 position: absolute;
-	 top: 50%;
-	 left: 50%;
-	 transform: translate(-50%, -50%);
-	 opacity: 0;
-	 transition: opacity 0.5s ease;
-	 z-index: 1;
-	 width: 300px;
-}
- .slider-wrapper .slider-container .slider.active {
-	 opacity: 1;
-	 z-index: 2;
-}
- .slider-wrapper .slider-container .slider h3 {
-	 text-align: center;
-	 font-weight: 600;
-	 padding-bottom: 10px;
-}
- .slider-wrapper .slider-container .slider div {
-	 width: 100%;
-}
- .slider-wrapper .slider-container .slider div img {
+ .step-container .step-body div img {
 	 max-width: 100%;
 	 max-height: 100%;
-	 display: block;
 	 margin: 0 auto;
+	 display: block;
 }
- .slider-wrapper .slider-container .slider p {
+ .step-container .step-body div.step-body-header {
 	 text-align: center;
+	 font-size: 16px;
+	 padding: 10px;
+	 font-weight: bold;
 }
- .slider-wrapper .slider-nav-container {
-	 height: 20px;
+ .step-container .step-body p {
 	 text-align: center;
+	 margin-bottom: 20px;
 }
- .slider-wrapper .slider-nav-container span {
-	 border: 1px solid #000;
-	 border-radius: 10px;
-	 width: 6px;
-	 height: 6px;
-	 display: inline-block;
-	 margin: 3px;
+ .step-container .step-footer {
+	 padding: 15px;
+	 background: #1c3f4f;
+	 border-radius: 0px 0px 5px 5px;
+}
+ .step-container .step-footer button {
+	 background: none;
+	 border: none;
+	 outline: none;
 	 cursor: pointer;
+	 font-size: 17px;
+	 color: #fff;
 }
- .slider-wrapper .slider-nav-container span.active {
-	 background-color: #000;
+ .step-container .step-footer div.step-nav {
+	 width: calc(100% - 127px);
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    position: relative;
+    top: 4px;
 }
- 
-        </textarea>
-            <textarea class="js"  readonly>
+.step-container .step-footer div:not(.step-nav) {
+    width: 60px;
+    display: inline-block;
+                    vertical-align: top;
+}
+ .step-container .step-footer div span {
+	 width: 8px;
+	 height: 8px;
+	 background: #ffffff55;
+	 display: inline-block;
+	 border-radius: 11px;
+	 margin: 0 5px;
+}
+ .step-container .step-footer div span.active {
+	 background: #fff;
+}
+ .clearfix:after {
+	 content: " ";
+	 visibility: hidden;
+	 display: block;
+	 height: 0;
+	 clear: both;
+}
+ .pull-left {
+	 float: left;
+}
+ .pull-right {
+	 float: right;
+}
+ .pendo-tooltip-caret {
+	 border-right: 10px solid #02293b !important;
+}
 
-        </textarea>
+
+            </textarea>
+            <textarea class="js"  readonly>
+                function next() {
+                    step.advance();
+                }
+                function skip() {
+                    step.dismiss();
+                }
+
+                // add steps dot to footer
+                 guide.steps.forEach(() => {
+                    $(".step-nav").append("<span></span>");
+                });
+                window.currentStepIndex = guide.steps.map(d => d.id).indexOf(step.id);
+                $(".step-nav span:nth-child(" + (window.currentStepIndex + 1) + ")").addClass("active");
+
+                //hide/show cta
+                if (guide.steps.length == 1 || window.currentStepIndex == guide.steps.length - 1) {
+                    $(".skip-btn, .next-btn").hide();
+                }
+                else {
+                    $(".got-btn").hide()
+                }
+            </textarea>
         </div>
         <div>
             <button class="reset">reset</button>
-        </div>
-        <div class="iframe-container">
-            <iframe src=""></iframe>
         </div>
     </div>
 
@@ -109,5 +158,6 @@
             integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
             crossorigin="anonymous"></script>
     <script src="global.js"></script>
+    <a href="https://jsfiddle.net/ugj4s73h/1/" target="_blank">fiddle</a>
     </body>
 </html>

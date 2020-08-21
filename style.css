@@ -12,22 +12,22 @@ textarea {
     height: 100px;
 }
 
-.slide-container {
+.step-container {
     margin: 0px 0px 20px;
 }
 
-.slide {
+.step {
     padding: 10px 0px;
     border-bottom: 1px solid #e2e2e2;
 }
 
-.slide > div {
+.step > div {
     display: inline-block;
     width: 33%;
     padding: 20px 0px;
 }
 
-.slide > div * {
+.step > div * {
     vertical-align: middle;
 }
 
